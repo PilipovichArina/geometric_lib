@@ -1,38 +1,41 @@
 import unittest
-from math import pi
-from circle import area, perimeter
+from square import area, perimeter
 
 
-class TestCircle(unittest.TestCase):
+class TestAreaSquare(unittest.TestCase):
+
     def test_area(self):
-        radius = 1
-        res = area(radius)
-        self.assertEqual(res, pi)
+        a = 5
+        expected_area = a * a
+        result = area(a)
+        self.assertAlmostEqual(result, expected_area)
 
-    def test_perimeter(self):
-        radius = 1
-        res = perimeter(radius)
-        self.assertEqual(res, 2 * pi)
+    def test_area_invalid_side(self):
+        invalid_side = [0, -1, -100]
+        for side in invalid_side:
+            with self.subTest(side=side):
+                with self.assertRaises(ValueError):
+                    area(side)
 
-    def test_area_zero(self):
-        radius = 0
-        res = area(radius)
-        self.assertEqual(res, 0)
 
-    def test_perimeter_zero(self):
-        radius = 0
-        res = perimeter(radius)
-        self.assertEqual(res, 0)
+class TestPerimeterSquare(unittest.TestCase):
 
-    def test_area_neg(self):
-        radius = -1
-        with self.assertRaises(AssertionError):
-            area(radius)
+    def test_perimetr(self):
+        a = 7
+        expected_perimetr = 4 * a
+        result = perimeter(a)
+        self.assertAlmostEqual(result, expected_perimetr)
 
-    def test_perimeter_neg(self):
-        radius = -1
-        with self.assertRaises(AssertionError):
-            perimeter(radius)
+    def test_perimeter_invalid_side(self):
+        invalid_side = [0, -1, -100]
+        for side in invalid_side:
+            with self.subTest(side=side):
+                with self.assertRaises(ValueError):
+                    perimeter(side)
+
+
+if __name__ == '__main__':
+    unittest.main()
 
 
 if __name__ == '__main__':
